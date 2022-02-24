@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('header', {title: `Sightings`}); -%>
+
+  <body>
+    <%- include('navbar'); -%>
+    <div class="container-fluid bg-dark vh-100">
+      <div class="row bg-black d-flex mh-100 h-100 ">
+        <div
+          class="col-12 col-sm-6 text-white text-center d-flex justify-content-center align-items-center flex-column h-sm-80"
+        >
+          <div>
+            <h1 class="display-3 mb-4 align-items-center">
+              Welcome UFO Watchers
+            </h1>
+          </div>
+          <div>
+            <a class="btn btn-lg btn-info" href="/sighting/all" role="button"
+              >See all Sightings</a
+            >
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 mh-100">
+          <img src="/header.png" alt="ufo-watcher" height="100%" width="100%" />
+        </div>
+      </div>
+    </div>
+
+    <%- include('footer'); -%>
+  </body>
+</html>

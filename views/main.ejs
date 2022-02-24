@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('header', {title: `Sightings`}); -%>
+
+  <body>
+    <%- include('navbar'); -%>
+    <div class="container-fluid bg-image min-vh-100 h-auto">
+      <br />
+      <div class="container mb-4 ">
+        <h2 class="display-3 text-white">
+          Sightings
+        </h2>
+      </div>
+
+      <div class="dropdown container">
+        <a
+          class="btn dropdown-toggle text-white bg-dark"
+          href="#"
+          role="button"
+          id="dropdownMenuLink"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Sort By
+        </a>
+
+        <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuLink">
+          <li>
+            <a
+              class="dropdown-item text-white"
+              href="/sighting/all?sortBy=date_time"
+              >Date & Time</a
+            >
+          </li>
+          <li>
+            <a
+              class="dropdown-item text-white"
+              href="/sighting/all?sortBy=shape"
+              >Shape</a
+            >
+          </li>
+          <li>
+            <a
+              class="dropdown-item text-white"
+              href="/sighting/all?sortBy=state"
+              >State</a
+            >
+          </li>
+        </ul>
+      </div>
+      <br />
+      <%- include('generate-sighting'); -%>
+    </div>
+
+    <%- include('footer'); -%>
+  </body>
+</html>

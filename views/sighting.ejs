@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('header', {title: `New Sighting`}); -%>
+  <body>
+    <%- include('navbar'); -%>
+    <div class="container-fluid text-white bg-image min-vh-100 h-auto">
+      <div class="container">
+        <br />
+        <div class="mb-4 mt-4">
+          <h2>Submit a Sighting</h2>
+        </div>
+
+        <form action="/sighting" method="POST">
+          <div class="row mb-3 justify-content-center">
+            <label for="text" class="col-sm-2 col-form-label"
+              >Information</label
+            >
+            <div class="col-sm-8">
+              <input
+                type="text"
+                class="form-control"
+                id="text"
+                name="text"
+                required
+              />
+            </div>
+          </div>
+          <div class="row mb-3 justify-content-center">
+            <label for="date_time" class="col-sm-2 col-form-label"
+              >Date & Time</label
+            >
+            <div class="col-sm-8">
+              <input
+                type="datetime-local"
+                class="form-control"
+                id="date_time"
+                name="date_time"
+                required
+              />
+            </div>
+          </div>
+          <div class="row mb-3 justify-content-center">
+            <label for="city" class="col-sm-2 col-form-label">City</label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                id="city"
+                class="form-control"
+                name="city"
+                required
+              />
+            </div>
+          </div>
+          <div class="row mb-3 justify-content-center">
+            <label for="state" class="col-sm-2 col-form-label">State</label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                id="state"
+                class="form-control"
+                name="state"
+                required
+              />
+            </div>
+          </div>
+          <div class="mb-3 row justify-content-center ">
+            <label for="shape" class="col-sm-2 col-form-label"> Shape</label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                id="shape"
+                class="form-control"
+                name="shape"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="mb-3 row justify-content-center">
+            <label for="duration" class="col-sm-2 col-form-label"
+              >Duration</label
+            >
+            <div class="col-sm-8">
+              <input
+                type="text"
+                id="duration"
+                class="form-control"
+                name="duration"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="mb-3 row justify-content-center">
+            <label for="summary" class="col-sm-2 col-form-label">Summary</label>
+            <div class="col-sm-8 text-white">
+              <input
+                type="summary"
+                class="form-control"
+                id="summary"
+                name="summary"
+                required
+              />
+            </div>
+          </div>
+          <div class="mt-5 mb-3 row justify-content-start">
+            <div class="d-grid jusitfy-content-start col-sm-3">
+              <button type="submit" class="btn btn-info">
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <%- include('footer'); -%>
+  </body>
+</html>

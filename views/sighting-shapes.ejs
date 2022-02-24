@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('header', {title: `Sightings`}); -%>
+
+  <body>
+    <%- include('navbar'); -%>
+    <div class="container-fluid bg-image text-white min-vh-100 h-auto">
+      <br />
+      <div class="container">
+         <h2 class="display-3 text-white mb-5"><%= ejsdata[0].shape %> - shaped Sightings </h2>
+      </div>
+     
+     <%- include('generate-sighting'); -%>
+    <%- include('footer'); -%>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('header', {title: `Sighting ${sighting.index}`}); -%>
+  <body>
+    <div class="container-fluid bg-image text-white min-vh-100 h-auto">
+      <%- include('navbar'); -%>
+      <div class=" container">
+        <h2 class="mb-5 mt-4 display-3">
+          Sighting <%= sighting.index %>
+        </h2>
+
+        <div
+          class="fs-5 fs-sm-6 container bg-black border-info border border-3 mb-5 text-white p-4"
+        >
+          <% for(const [key, value] of Object.entries(sighting)) { %>
+          <div class="row mb-3 justify-content-center">
+            <% if(key==="date_time") { %>
+            <div class="col-sm-2 fw-bold">Date & Time</div>
+            <div class="col-sm-8 fw-light"><%= value %></div>
+            <% } else if(key==="created_date_time") { %>
+            <br />
+            <div class="col-sm-12 mt-5 fw-light">
+              Sighting was created/editted on <%= value %>
+            </div>
+            <% } else if(key === "index") { %>
+            <div></div>
+            <% } else { %>
+            <div class="col-sm-2 fw-bold text-capitalize"><%= key %></div>
+            <div class="col-sm-8 fw-light"><%= value %></div>
+            <% } %>
+          </div>
+          <% } %>
+        </div>
+
+        <div class="mb-3 row justify-content-start">
+          <div class="col-3">
+            <div class="d-grid col-12 mx-auto">
+              <a
+                class="btn btn-info"
+                href="/sighting/<%= sighting.index %>/edit"
+                role="button"
+                >Edit Sighting</a
+              >
+            </div>
+          </div>
+          <div class="col-3">
+            <form
+              action="/sighting/<%= sighting.index %>?_method=DELETE"
+              method="POST"
+            >
+              <div class="d-grid col-12 mx-auto">
+                <button type="submit" class="btn btn-info">
+                  Delete a Sighting
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('footer'); -%>
+  </body>
+</html>

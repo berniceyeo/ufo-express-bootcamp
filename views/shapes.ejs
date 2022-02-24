@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('header', {title: `Shapes`}); -%>
+  <body>
+    <%- include('navbar'); -%>
+    <div class="container-fluid bg-image min-vh-100 h-auto">
+      <div class="container">
+        <br />
+        <div class="mb-4 mt-5">
+          <h2 class="display-3 text-white text-center">
+            Shapes of Sightings
+          </h2>
+        </div>
+
+        <% shapes.forEach((shape) => { %>
+        <div class="card w-50 mb-4 mx-auto">
+          <div class="card-body bg-dark text-white">
+            <p class="card-title lead fs-4"><%= shape %></p>
+            <p class="card-text fs-6 fw-light">
+              Click the link below to access UFOs with the shape of <%= shape %>
+            </p>
+            <a href="/shapes/<%= shape %>" class="btn btn-info"
+              >UFOs that are <%= shape %> shaped</a
+            >
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+
+    <%- include('footer'); -%>
+  </body>
+</html>
