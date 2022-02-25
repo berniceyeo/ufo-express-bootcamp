@@ -1,11 +1,4 @@
 .bg-image {
-  background-image: url("/phone-background.png");
+  background-image: url("/header.jpg");
   background-size: 100% 100%;
-}
-
-@media only screen and (min-width: 600px) {
-  .bg-image {
-    background-image: url("/background.png");
-    background-size: 100% 100%;
-  }
 }

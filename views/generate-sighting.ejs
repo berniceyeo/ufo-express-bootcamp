@@ -1,13 +1,15 @@
 <% ejsdata.forEach((sighting,i) => { %>
 <a href="/sighting/<%= i %>" style="text-decoration: none;">
-  <div class="container text-white bg-dark mb-4">
-    <div class="row d-flex align-items-center p-5">
-      <div class="col-sm-10 fw-light fs-6"><%= sighting.text %></div>
-      <div class="col-sm-2 align-self-stretch fw-light fs-6 ">
-        <%= sighting.date_time %> <br />
-        <%= sighting.state %> <br />
-        <%= sighting.shape %> <br />
+  <div class="container text-white bg-dark mb-4 p-5">
+    <div class="row d-flex align-items-center">
+      <div
+        class="col-sm-6 align-self-stretch text-start text-info fw-light fs-6 mb-1"
+      >
+        <%= sighting.date_time %> | <%= sighting.state %> |<%= sighting.shape %>
       </div>
+    </div>
+    <div class="row d-flex align-items-center">
+      <div class="col-sm-12 fw-light fs-6"><%= sighting.text %></div>
     </div>
   </div>
 </a>

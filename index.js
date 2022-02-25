@@ -1,17 +1,22 @@
 import express from 'express';
 import methodOverride from 'method-override';
 import moment from 'moment';
+import cookieParser from 'cookie-parser';
 import {
   edit, read, write, remove,
 } from './dataFileStorage.js';
 
 const app = express();
+const PORT = process.argv[2];
+
 app.set('view engine', 'ejs');
 // to allow use of static
 app.use(express.static('public'));
 
 // Override POST requests with query param ?_method=PUT to be PUT requests
 app.use(methodOverride('_method'));
+// to parse cookies into dictionary with key-pairs
+app.use(cookieParser());
 
 // Configure Express to parse request body data into request.body
 app.use(express.urlencoded({ extended: false }));
@@ -21,6 +26,17 @@ const generateDate = (string) => {
   const now = moment().format('DD MMM YYYY hh:mm');
 
   return [date, now];
+};
+
+const increaseVisit = (request, response) => {
+  let visits = 0;
+
+  // if there is a visit in the cookie list
+  if (request.cookies.visits) {
+    visits = Number(request.cookies.visits);
+  }
+  visits += 1;
+  response.cookie('visits', visits); // set a new value to send back
 };
 
 const dynamicSort = (method, obj) => {
@@ -43,7 +59,9 @@ const dynamicSort = (method, obj) => {
 
 // Main Page with all the sightings
 app.get('/', (request, response) => {
-  response.render('main-page');
+  increaseVisit(request, response);
+  const { visits } = request.cookies;
+  response.render('main-page', { visits });
 });
 
 app.get('/sighting/all', (request, response) => {
@@ -171,4 +189,4 @@ app.get('/shapes/:name', (request, response) => {
   });
 });
 
-app.listen(3004);
+app.listen(PORT);
