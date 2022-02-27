@@ -9,9 +9,7 @@
           Sighting <%= sighting.index %>
         </h2>
 
-        <div
-          class="fs-5 fs-sm-6 container bg-black border-info border border-3 mb-5 text-white p-4"
-        >
+        <div class="fs-sm-6 fs-sm-6 container bg-dark mb-5 text-white p-4">
           <% for(const [key, value] of Object.entries(sighting)) { %>
           <div class="row mb-3 justify-content-center">
             <% if(key==="date_time") { %>
@@ -19,10 +17,10 @@
             <div class="col-sm-8 fw-light"><%= value %></div>
             <% } else if(key==="created_date_time") { %>
             <br />
-            <div class="col-sm-12 mt-5 fw-light">
+            <div class="col-sm-12 mt-3 fw-light">
               Sighting was created/editted on <%= value %>
             </div>
-            <% } else if(key === "index") { %>
+            <% } else if(key === "index" || key==="fav") { %>
             <div></div>
             <% } else { %>
             <div class="col-sm-2 fw-bold text-capitalize"><%= key %></div>
@@ -33,7 +31,7 @@
         </div>
 
         <div class="mb-3 row justify-content-start">
-          <div class="col-3">
+          <div class="col-sm-3 col-5">
             <div class="d-grid col-12 mx-auto">
               <a
                 class="btn btn-info"
@@ -43,7 +41,7 @@
               >
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-sm-3 col-5">
             <form
               action="/sighting/<%= sighting.index %>?_method=DELETE"
               method="POST"
@@ -54,6 +52,17 @@
                 </button>
               </div>
             </form>
+          </div>
+          <div class="col-sm-3 col-2">
+            <div class="d-grid col-12 mx-auto">
+              <a
+                class="btn btn-info fs-4 p-0 <%= sighting.fav %> "
+                href="/sighting/<%= sighting.index %>?toggle=yes"
+                role="button"
+              >
+                ♥️
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -30,13 +30,13 @@ const generateDate = (string) => {
 
 const increaseVisit = (request, response) => {
   let visits = 0;
-
   // if there is a visit in the cookie list
   if (request.cookies.visits) {
     visits = Number(request.cookies.visits);
   }
+
   visits += 1;
-  response.cookie('visits', visits); // set a new value to send back
+  response.cookie('visits', visits);
 };
 
 const dynamicSort = (method, obj) => {
@@ -55,6 +55,35 @@ const dynamicSort = (method, obj) => {
     return 0;
   });
   return sortObj;
+};
+
+const favouritesCookieHandler = (request, response, index, command) => {
+  let favourites = [];
+
+  if (command === 'unfavourite') {
+    const current = JSON.parse(request.cookies.favourites);
+    favourites = current.filter((item) => Number(item) !== Number(index));
+    response.cookie('favourites', JSON.stringify(favourites));
+  } else if (!request.cookies.favourites) {
+    favourites.push(index);
+    response.cookie('favourites', JSON.stringify(favourites));
+  } else {
+    const oldFav = request.cookies.favourites;
+    const Fav = JSON.parse(oldFav);
+    favourites = [...Fav, index];
+    favourites = favourites.filter((value, i) => favourites.indexOf(value) === i);
+    response.cookie('favourites', JSON.stringify(favourites));
+  }
+};
+
+const toggleFavourite = (item) => {
+  if (typeof item.fav === 'undefined') {
+    item.fav = 'favourite';
+  } else if (item.fav === 'favourite') {
+    item.fav = 'unfavourite';
+  } else {
+    item.fav = 'favourite';
+  }
 };
 
 // Main Page with all the sightings
@@ -109,6 +138,7 @@ app.post('/sighting', (request, response) => {
 app.get('/sighting/:index', (request, response) => {
   read('data.json', (error, data) => {
     const { index } = request.params;
+    const { toggle } = request.query;
 
     if (typeof data.sightings[index] === 'undefined') {
       // if there is no index
@@ -116,6 +146,13 @@ app.get('/sighting/:index', (request, response) => {
     } else {
       const sighting = { ...data.sightings[index] };
       sighting.index = index;
+      if (toggle) {
+        toggleFavourite(data.sightings[index]);
+        write('data.json', data, (error) => {
+          console.log(error);
+        });
+        favouritesCookieHandler(request, response, index, data.sightings[index].fav);
+      }
       const ejsData = { sighting };
       response.render('sighting_submit', ejsData);
     }
